@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-Copyright 2018 The Go Authors. All rights reserved.
-Use of this source code is governed by a BSD-style
-license that can be found in the LICENSE file.
--->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -32,9 +27,24 @@ license that can be found in the LICENSE file.
         }
       );
 
-    </script>
+      function preparePixelData() {
+        let expression = document.getElementById("expression").value
 
-    <button onClick="showPic('value1')" id="addButton">showPic</button>
+        let p = []
+
+        for(y = 0; y < 256; y++) {
+          p[y] = []
+          for(x = 0; x < 256; x++) {
+            p[y][x] = eval(expression + "% 256")
+          }
+        }
+        showPic(JSON.stringify(p))
+      }
+
+    </script>
+    <p>Enter mathematical expression for x and/or y: (in JS)</p>
+    <input id="expression"/>
+    <button onClick="preparePixelData()" id="addButton">showPic</button>
     <img src="" id="img"/>
   </body>
 </html>

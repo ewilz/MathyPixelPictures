@@ -32,9 +32,25 @@ license that can be found in the LICENSE file.
         }
       );
 
-    </script>
+      function preparePixelData() {
+        let expression = document.getElementById("expression").value
+        const dx = 256
+        const dy = 256
 
-    <button onClick="showPic('value1')" id="addButton">showPic</button>
+        let p = []
+
+        for(y = 0; y < 256; y++) {
+          p[y] = []
+          for(x = 0; x < 256; x++) {
+            p[y][x] = eval(expression + "% 256")
+          }
+        }
+        showPic(JSON.stringify(p))
+      }
+
+    </script>
+    <input id="expression"/>
+    <button onClick="preparePixelData()" id="addButton">showPic</button>
     <img src="" id="img"/>
   </body>
 </html>
